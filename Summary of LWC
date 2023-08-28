@@ -1,0 +1,33 @@
+Here's a summary of the Lightning Web Component (LWC) and its working details:
+
+Summary:
+The given Lightning Web Component (LWC) is designed to help users find and merge duplicate contact and lead records in Salesforce. It consists of a user interface (UI) that allows users to input a name and email, fetch duplicate records based on these inputs, and subsequently merge selected duplicates. The component utilizes Apex classes to handle the backend logic for querying and merging records.
+
+Working Details:
+
+Apex Class 1: ContactController.cls
+
+The ContactController Apex class contains methods for finding duplicate contacts and leads based on provided name and email.
+The findDuplicateContacts method queries the Contact object for records with matching name and email, returning a list of duplicate contacts.
+The findDuplicateLeads method performs a similar query on the Lead object.
+Apex Class 2: MergeDuplicateContacts.cls
+
+The MergeDuplicateContacts Apex class handles the merging of duplicate contacts.
+The mergeContacts method takes a list of record IDs as input and initiates the merging process.
+It fetches contact records based on provided IDs and organizes them by email.
+For each set of duplicate contacts with the same email, it selects one as the master and assigns field values from other duplicates to the master.
+Related records can also be updated through the updateRelatedRecords method.
+After merging, the master contact is updated and duplicate contacts are deleted.
+duplicateContactFinder.html
+
+The LWC's HTML template presents a user interface for input and interaction.
+It includes input fields for name and email, along with buttons to check for duplicate contacts and leads.
+When duplicates are found, a datatable displays them, allowing users to select records for merging.
+duplicateContactFinder.js
+
+The JavaScript controller handles user interactions and communicates with Apex methods.
+It tracks input values, selected duplicate records, and handles row selections.
+The checkDuplicates and checkDuplicateLeads functions call the corresponding Apex methods to fetch duplicate records.
+The handleRowSelection function updates the list of selected IDs when users select rows in the datatable.
+The mergeRecords function triggers the merging process by calling the mergeContacts Apex method with selected IDs.
+In summary, the Lightning Web Component provides a user-friendly interface to find and merge duplicate contacts and leads using Salesforce's Apex classes for backend processing. It streamlines the process of identifying duplicates and consolidating their information, enhancing data accuracy and management.
